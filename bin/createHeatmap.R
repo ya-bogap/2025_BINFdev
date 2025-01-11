@@ -73,10 +73,39 @@ annoColors <- list(
 ## Create a basic heatmap##
 ################################################
 ################################################
-
+basic_output <- paste0("basic_heatmap_", outprefix, ".pdf")
+pdf(basic_output)
+pheatmap(
+  sampleData,
+  clustering_distance_rows = "euclidean",   # Row clustering using Euclidean distance
+  clustering_distance_cols = "euclidean",   # Column clustering using Euclidean distance
+  clustering_method = "ward.D",             # Use Ward’s clustering method
+  main = "Basic Heatmap",                   # Set the title of the heatmap
+  fontsize_row = 8,                         # Font size for row labels
+  fontsize_col = 8                          # Font size for column labels
+)
+dev.off()
 
 ################################################
 ################################################
 ## Create a basic heatmap##
 ################################################
 ################################################
+complex_output <- paste0("complex_heatmap_", outprefix, ".pdf")
+pdf(complex_output)
+pheatmap(
+  sampleData,
+  annotation_col = annoData,                # Add column annotations
+  annotation_colors = annoColors,          # Set colors for annotations
+  clustering_distance_rows = "euclidean",  # Row clustering using Euclidean distance
+  clustering_distance_cols = "euclidean",  # Column clustering using Euclidean distance
+  clustering_method = "ward.D",            # Use Ward’s clustering method
+  main = "Complex Heatmap",                # Set the title of the heatmap
+  fontsize_row = 8,                        # Font size for row labels
+  fontsize_col = 8,                        # Font size for column labels
+  show_rownames = FALSE,                   # Hide row names
+  show_colnames = FALSE,                   # Hide column names
+  legend_breaks = c(min(sampleData), mean(sampleData), max(sampleData)), # Legend breaks
+  legend_labels = c("Low", "Medium", "High")                              # Legend labels
+)
+dev.off()
